@@ -1,3 +1,5 @@
-import msg from './import_file';
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./components/App.js";
 
-msg();
+ReactDOM.render(<App />, document.getElementById("root"));

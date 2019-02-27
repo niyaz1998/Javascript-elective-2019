@@ -1,12 +1,16 @@
-import React, { Component } from "react";
-import {BrowserRouter, Route} from 'react-router-dom'
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import React, {Component} from "react";
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles';
 import orange from '@material-ui/core/colors/orange';
 
 import LoginTab from "./pages/login_form";
+import {ExcursionsList} from "./pages/excursions_list"
 
 const theme = createMuiTheme(
     {
+        typography: {
+            useNextVariants: true,
+        },
         palette: {
             primary: {
                 ...orange,
@@ -19,20 +23,21 @@ const theme = createMuiTheme(
 class App extends Component {
     render() {
         return (
-            <MuiThemeProvider theme={theme}>
+            //  login page
+            // page to see list of all excursions (short information)
+            // page to add new excursion
+            // page to see detailed information about particular excursions (by id) and edit fields if needed
                 <BrowserRouter>
-                    <div>
-                        // login page
-                        <Route path="/login" component={LoginTab}/>
-                        // page to see list of all excursions (short information)
-                        <Route path="/excursions" component={() => <h1> Not implemented yet</h1>}/>
-                        // page to add new excursion
-                        <Route path="/add_excursion" component={() => <h1> Not implemented yet</h1>}/>
-                        // page to see detailed information about particular excursions (by id) and edit fields if needed
-                        <Route path="/excursion/:id" component={() => <h1> Not implemented yet</h1>}/>
-                    </div>
+                    <main>
+                        <Switch>
+                            <Route path="/login" component={LoginTab}/>
+                            <Route path="/excursions" component={ExcursionsList}/>
+                            <Route path="/add_excursion" component={() => <h1> Not implemented yet</h1>}/>
+                            <Route path="/excursion/:id" component={() => <h1> Not implemented yet</h1>}/>
+                            <Redirect from="*" to="/excursions"/>
+                        </Switch>
+                    </main>
                 </BrowserRouter>
-            </MuiThemeProvider>
         );
     }
 }

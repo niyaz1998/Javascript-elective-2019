@@ -2,48 +2,53 @@ import React from "react"
 import axios from 'axios'
 import List from '@material-ui/core/List'
 
-export class CharactersList extends React.Component {
+import {ExcursionListItem} from '../components/excursion_list_item'
+import styles from './excursions_list.css';
 
-    state = {
-        searchQuery: ''
-    };
+
+export class ExcursionsList extends React.Component {
+
+    state = {};
 
     componentDidMount() {
-        this.loadExcursions()
+        this.loadExcursions();
     }
 
-    loadExcursions = (name = '') => {
-        axios({
-            method: 'get',
-            url: '/excursions',
-            data: {
-                name: name,
-                password: password
-            }
-        }).then((response) => {
-            console.log(response.data);
-        }).catch((e) => {
-            console.log(e);
-        }).then(() => {
-
-        });
+    loadExcursions = () => {
+        this.setState({error: void 0});
+        axios.get('/excursions')
+            .then(response => {
+                this.setState({excursions: response.data.excursions});
+                console.log(response.data.excursions);
+            })
+            .catch((err) => {
+                this.setState({
+                    error: 'Error occurred'
+                })
+            })
     };
 
     render() {
-        console.log(window.location.search.split('=')[1]);
-        if (!this.state.characters) {
+
+        if (this.state.error) {
+            return <h3>{this.state.error}</h3>
+        }
+
+        if (!this.state.excursions) {
             return <h1>Loading...</h1>
         }
 
         return (
             <div>
-                <AppBar/>
-                <Grid container spacing={16}>
-                    {this.state.characters.map((character, idx) =>
-                        <CharacterCard key={character.id} character={character}/>
+                <List className={styles.root}>
+                    {this.state.excursions.map((excursion) =>
+                        <ExcursionListItem
+                            key={excursion.id}
+                            excursion={excursion}
+                        />
                     )}
-                </Grid>
+                </List>
             </div>
         )
-    };
+    }
 }

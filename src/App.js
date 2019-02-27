@@ -3,7 +3,7 @@ import {BrowserRouter, Route} from 'react-router-dom'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import orange from '@material-ui/core/colors/orange';
 
-import LoginTab from  "./login_form";
+import LoginTab from "./pages/login_form";
 
 const theme = createMuiTheme(
     {

@@ -27,6 +27,7 @@ class App extends Component {
             // page to see list of all excursions (short information)
             // page to add new excursion
             // page to see detailed information about particular excursions (by id) and edit fields if needed
+            <MuiThemeProvider theme={theme}>
                 <BrowserRouter>
                     <main>
                         <Switch>
@@ -38,6 +39,7 @@ class App extends Component {
                         </Switch>
                     </main>
                 </BrowserRouter>
+            </MuiThemeProvider>
         );
     }
 }

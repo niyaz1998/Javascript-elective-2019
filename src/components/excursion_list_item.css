@@ -1,25 +1,21 @@
+.item {
+    width: 100%;
+}
+
 .card {
     display: flex;
-}
-
-.details {
-    display: flex;
-    flex-direction: column;
-}
-
-.content {
-    flex: 1 0 auto;
+    width: 100%;
 }
 
 .image {
     height: 200px;
 }
 
-.controls {
-    display: flex;
-    align-items: center;
+.details {
+    width: 100%;
 }
 
-.item {
-    width: 100%;
+.controls {
+    justify-content: flex-end;
+    margin-right: 20px;
 }

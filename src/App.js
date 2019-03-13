@@ -5,6 +5,7 @@ import orange from '@material-ui/core/colors/orange';
 
 import LoginTab from "./pages/login_form";
 import {ExcursionsList} from "./pages/excursions_list"
+import {ExcursionInput} from "./components/excursion_input/excursion_input";
 
 const theme = createMuiTheme(
     {
@@ -33,9 +34,9 @@ class App extends Component {
                         <Switch>
                             <Route path="/login" component={LoginTab}/>
                             <Route path="/excursions_list" component={ExcursionsList}/>
-                            <Route path="/add_excursion" component={() => <h1> Not implemented yet</h1>}/>
+                            <Route path="/add_excursion" component={ExcursionInput}/>
                             <Route path="/excursion/:id" component={() => <h1> Not implemented yet</h1>}/>
-                            <Redirect from="*" to="/excursions_list"/>
+                            <Redirect from="*" to="/add_excursion"/>
                         </Switch>
                     </main>
                 </BrowserRouter>

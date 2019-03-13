@@ -55,7 +55,7 @@ class LoginTab extends Component {
                 <Button className={this.props.classes.button}
                         type="submit"
                         fullWidth
-                        variant="raised"
+                        variant="contained"
                         color="primary"
                         onClick={logInFunc}>
                     Log In

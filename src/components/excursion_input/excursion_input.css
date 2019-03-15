@@ -11,3 +11,14 @@
 
 .iconButton {
 }
+
+.horizontalList {
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+    flex-wrap: wrap;
+}
+
+.selectableButton {
+    margin: 8px;
+}

@@ -1,11 +1,13 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
-import DropDownMenu from '@material-ui/core/MenuList';
-import MenuItem from '@material-ui/core/MenuItem';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import PlayListAdd from "@material-ui/icons/PlaylistAdd"
+import PlayListAdd from "@material-ui/icons/PlaylistAdd";
+
+import {MyTextField} from "./key_text_field";
+import {ExcursionTypeSelector} from "./excursion_type_selector"
+import {ExcursionServicesSelector} from "./excursion_servises_selector";
 
 
 import styles from './excursion_input.css';
@@ -18,6 +20,16 @@ export class ExcursionInput extends React.Component {
         excursion: {}
     };
 
+    textFields = [
+        {label: "region", title: "Регион"},
+        {label: "title", title: "Название"},
+        {label: "duration", title: "Длительность (в минутах)"},
+        {label: "description", title: "Описание"},
+        {label: "starting_point", title: "Точка отправления"},
+        {label: "price_adult", title: "Стоиомсть для взрослых"},
+        {label: "price_child", title: "Стоимость для детей"},
+    ];
+
     addListItem = (name, value) => {
         console.log(name, value);
         console.log(this.state.excursion[name]);
@@ -25,34 +37,17 @@ export class ExcursionInput extends React.Component {
             this.state.excursion[name] = [];
         }
         this.state.excursion[name] = this.state.excursion[name].concat([value]);
-        console.log(this.state.excursion[name]);
+        console.log(this.state.excursion);
         this.setState(this.state);
     };
 
     getListValue = name => {
-        if(!this.state.excursion[name]) {
+        if (!this.state.excursion[name]) {
             return [];
         } else {
             return this.state.excursion[name];
         }
     };
-
-
-    handleTextChange = name => event => {
-        this.state.excursion[name] = event.target.value;
-        this.setState(
-            this.state
-        );
-    };
-
-    getValue = name => {
-        if (!this.state.excursion[name]) {
-            return "";
-        } else {
-            return this.state.excursion[name];
-        }
-    };
-
 
     constructor(props) {
         super(props);
@@ -61,78 +56,40 @@ export class ExcursionInput extends React.Component {
         }
     }
 
+    setKeyValue = (key, value) => {
+        this.state.excursion[key] = value;
+        this.setState(this.state);
+        console.log(this.state.excursion);
+    };
+
     render() {
 
         return (
+            ///TODO: может быть вынести список текстовых полей в отдельный компонент
             <div>
-                <MyTextField
-                    label={"region"}
-                    title={"Регион"}
-                    handleChange={this.handleTextChange}
-                    getValue={this.getValue}
-                />
-                <MyTextField
-                    label={"title"}
-                    title={"Название"}
-                    handleChange={this.handleTextChange}
-                    getValue={this.getValue}
-                />
-                <MyTextField
-                    label={"duration"}
-                    title={"Длительность (в минутах)"}
-                    handleChange={this.handleTextChange}
-                    getValue={this.getValue}
-                />
-                <MyTextField
-                    label={"description"}
-                    title={"Описание"}
-                    handleChange={this.handleTextChange}
-                    getValue={this.getValue}
-                />
-                <MyTextField
-                    label={"starting_point"}
-                    title={"Точка отправления"}
-                    handleChange={this.handleTextChange}
-                    getValue={this.getValue}
-                />
-                <MyTextField
-                    label={"price_adult"}
-                    title={"Стоимость для взрослых"}
-                    handleChange={this.handleTextChange}
-                    getValue={this.getValue}
-                />
-                <MyTextField
-                    label={"price_child"}
-                    title={"Стоимость для взрослых"}
-                    handleChange={this.handleTextChange}
-                    getValue={this.getValue}
-                />
+                <List>
+                    {this.textFields.map((pair) => (
+                        <div key={pair.label}>
+                            <MyTextField
+                                label={pair.label}
+                                title={pair.title}
+                                setKeyValue={this.setKeyValue}
+                                initValue={this.state.excursion[pair.label]}
+                            />
+                        </div>
+                    ))}
+                </List>
                 <ExtendableList
                     label={"services"}
                     onAdd={this.addListItem}
                     getValue={this.getListValue}
                 />
+                <ExcursionTypeSelector setKeyValue={this.setKeyValue}/>
+                <ExcursionServicesSelector setKeyValue={this.setKeyValue}/>
             </div>
         );
     }
 
-}
-
-// handleChange - function that will be called when value changes
-// label - value that will be passed to handleChange function
-// title - title of the text field
-class MyTextField extends React.Component {
-    render() {
-        return (
-            <TextField
-                className={styles.textField}
-                label={this.props.title}
-                value={this.props.getValue(this.props.label)}
-                onChange={this.props.handleChange(this.props.label)}
-                margin="normal"
-            />
-        );
-    }
 }
 
 class ExtendableList extends React.Component {

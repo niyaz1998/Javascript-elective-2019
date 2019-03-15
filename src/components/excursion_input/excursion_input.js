@@ -1,8 +1,15 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
+import DropDownMenu from '@material-ui/core/MenuList';
+import MenuItem from '@material-ui/core/MenuItem';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import PlayListAdd from "@material-ui/icons/PlaylistAdd"
 
 
 import styles from './excursion_input.css';
+import {IconButton} from "@material-ui/core";
 
 
 export class ExcursionInput extends React.Component {
@@ -11,13 +18,31 @@ export class ExcursionInput extends React.Component {
         excursion: {}
     };
 
+    addListItem = (name, value) => {
+        console.log(name, value);
+        console.log(this.state.excursion[name]);
+        if (!this.state.excursion[name]) {
+            this.state.excursion[name] = [];
+        }
+        this.state.excursion[name] = this.state.excursion[name].concat([value]);
+        console.log(this.state.excursion[name]);
+        this.setState(this.state);
+    };
+
+    getListValue = name => {
+        if(!this.state.excursion[name]) {
+            return [];
+        } else {
+            return this.state.excursion[name];
+        }
+    };
+
 
     handleTextChange = name => event => {
         this.state.excursion[name] = event.target.value;
         this.setState(
             this.state
         );
-        console.log(this.state);
     };
 
     getValue = name => {
@@ -82,11 +107,10 @@ export class ExcursionInput extends React.Component {
                     handleChange={this.handleTextChange}
                     getValue={this.getValue}
                 />
-                <MyTextField
-                    label={"operator_id"}
-                    title={"ID оператора"}
-                    handleChange={this.handleTextChange}
-                    getValue={this.getValue}
+                <ExtendableList
+                    label={"services"}
+                    onAdd={this.addListItem}
+                    getValue={this.getListValue}
                 />
             </div>
         );
@@ -107,6 +131,60 @@ class MyTextField extends React.Component {
                 onChange={this.props.handleChange(this.props.label)}
                 margin="normal"
             />
+        );
+    }
+}
+
+class ExtendableList extends React.Component {
+
+    state = {
+        value: ""
+    };
+
+    onChange = event => {
+        this.state.value = event.target.value;
+        this.setState(
+            this.state
+        );
+    };
+
+    onButtonClick = (onItemAdd) => () => {
+        if (this.state.value && this.state.value !== "") {
+            onItemAdd(this.props.label, this.state.value);
+            this.state.value = "";
+            this.setState(this.state);
+        }
+    };
+
+
+    render() {
+        return (
+            <div>
+                <div>
+                    Начало увеличиваемого списка
+                </div>
+                <List className={styles.extendableList}>
+                    {this.props.getValue(this.props.label).map((text, i) => (
+                        <ListItem key={i}>
+                            <ListItemText primary={text}/>
+                        </ListItem>
+                    ))}
+                    <div>
+                        <TextField
+                            className={styles.textField}
+                            value={this.state.value}
+                            onChange={this.onChange}
+                            margin="normal"
+                        />
+                        <IconButton
+                            className={styles.iconButton}
+                            color="primary"
+                            onClick={this.onButtonClick(this.props.onAdd)}>
+                            <PlayListAdd/>
+                        </IconButton>
+                    </div>
+                </List>
+            </div>
         );
     }
 }

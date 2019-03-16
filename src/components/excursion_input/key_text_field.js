@@ -34,6 +34,7 @@ export class MyTextField extends React.Component {
                 className={styles.textField}
                 label={this.props.title}
                 value={this.state.value}
+                type={this.props.inputType}
                 onChange={this.handleTextChange}
                 margin="normal"
             />

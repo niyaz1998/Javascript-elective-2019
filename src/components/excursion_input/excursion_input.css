@@ -22,3 +22,12 @@
 .selectableButton {
     margin: 8px;
 }
+
+.timeContainer {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.timeField {
+    width: 200px;
+}

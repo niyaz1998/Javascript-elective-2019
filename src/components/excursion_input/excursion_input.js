@@ -8,7 +8,7 @@ import PlayListAdd from "@material-ui/icons/PlaylistAdd";
 import {MyTextField} from "./key_text_field";
 import {ExcursionTypeSelector} from "./excursion_type_selector"
 import {ExcursionServicesSelector} from "./excursion_servises_selector";
-
+import {ExcursionDurationPicker} from "./duration_time_picker";
 
 import styles from './excursion_input.css';
 import {IconButton} from "@material-ui/core";
@@ -21,13 +21,12 @@ export class ExcursionInput extends React.Component {
     };
 
     textFields = [
-        {label: "region", title: "Регион"},
-        {label: "title", title: "Название"},
-        {label: "duration", title: "Длительность (в минутах)"},
-        {label: "description", title: "Описание"},
-        {label: "starting_point", title: "Точка отправления"},
-        {label: "price_adult", title: "Стоиомсть для взрослых"},
-        {label: "price_child", title: "Стоимость для детей"},
+        {label: "region", title: "Регион", inputType: "text"},
+        {label: "title", title: "Название", inputType: "text"},
+        {label: "description", title: "Описание", inputType: "text"},
+        {label: "starting_point", title: "Точка отправления", inputType: "text"},
+        {label: "price_adult", title: "Стоиомсть для взрослых", inputType: "number"},
+        {label: "price_child", title: "Стоимость для детей", inputType: "number"},
     ];
 
     addListItem = (name, value) => {
@@ -67,6 +66,7 @@ export class ExcursionInput extends React.Component {
         return (
             ///TODO: может быть вынести список текстовых полей в отдельный компонент
             <div>
+                <ExcursionDurationPicker setKeyValue={this.setKeyValue}/>
                 <List>
                     {this.textFields.map((pair) => (
                         <div key={pair.label}>
@@ -75,6 +75,7 @@ export class ExcursionInput extends React.Component {
                                 title={pair.title}
                                 setKeyValue={this.setKeyValue}
                                 initValue={this.state.excursion[pair.label]}
+                                inputType={this.inputType}
                             />
                         </div>
                     ))}

@@ -5,12 +5,12 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import PlayListAdd from "@material-ui/icons/PlaylistAdd";
 
-import {MyTextField} from "./key_text_field";
-import {ExcursionTypeSelector} from "./excursion_type_selector"
-import {ExcursionServicesSelector} from "./excursion_servises_selector";
-import {ExcursionDurationPicker} from "./duration_time_picker";
+import {MyTextField} from "./keyTextField";
+import {ExcursionTypeSelector} from "./excursionTypeSelector"
+import {ExcursionServicesSelector} from "./excursionServisesSelector";
+import {ExcursionDurationPicker} from "./durationTimePicker";
 
-import styles from './excursion_input.css';
+import styles from './excursionTextInput.css';
 import {IconButton} from "@material-ui/core";
 
 
@@ -56,8 +56,16 @@ export class ExcursionInput extends React.Component {
     }
 
     setKeyValue = (key, value) => {
-        this.state.excursion[key] = value;
-        this.setState(this.state);
+
+        const newState = {
+            ...this.state,
+            excursion: {
+                ...this.state.excursion
+            }
+        };
+
+        newState.excursion[key] = value;
+        this.setState(newState);
         console.log(this.state.excursion);
     };
 

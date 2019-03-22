@@ -2,8 +2,8 @@ import React from "react"
 import axios from 'axios'
 import List from '@material-ui/core/List'
 
-import {ExcursionListItem} from '../components/excursion_list_item'
-import styles from './excursions_list.css';
+import {ExcursionListItem} from '../../components/ExcursionListItem/excursionListItem'
+import styles from './excursionsList.css';
 
 
 export class ExcursionsList extends React.Component {

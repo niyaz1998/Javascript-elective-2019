@@ -2,7 +2,7 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 
 
-import styles from './excursion_input.css';
+import styles from './excursionTextInput.css';
 
 // handleChange - function that will be called when value changes
 // label - value that will be passed to handleChange function

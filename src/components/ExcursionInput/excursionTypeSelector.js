@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-import styles from './excursion_input.css';
+import styles from './excursionTextInput.css';
 import {Button, List} from "@material-ui/core";
 
 const types = [

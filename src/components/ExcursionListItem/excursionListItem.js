@@ -5,7 +5,7 @@ import {CardActions, ListItem} from "@material-ui/core";
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
-import styles from './excursion_list_item.css';
+import styles from './excursionListItem.css';
 
 export const ExcursionListItem = ({excursion}) => {
     return (

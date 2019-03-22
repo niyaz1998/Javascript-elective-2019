@@ -3,9 +3,9 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles';
 import orange from '@material-ui/core/colors/orange';
 
-import LoginTab from "./pages/login_form";
-import {ExcursionsList} from "./pages/excursions_list"
-import {ExcursionInput} from "./components/excursion_input/excursion_input";
+import LoginTab from "./containers/LoginForm/loginForm";
+import {ExcursionsList} from "./containers/ExcursionList/excursionsList"
+import {ExcursionInput} from "./components/ExcursionInput/excursionTextInput";
 
 const theme = createMuiTheme(
     {

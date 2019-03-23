@@ -29,6 +29,15 @@ const theme = createMuiTheme(
                 ...orange,
                 contrastText: "#fff"
             }
+        },
+        overrides: {
+            MuiFab: {
+                root: {
+                    position: 'absolute',
+                    bottom: '2rem',
+                    right: '2rem'
+                }
+            }
         }
     }
 );

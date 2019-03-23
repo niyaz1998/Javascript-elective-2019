@@ -1,21 +1,10 @@
 import React, {Component} from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import {withStyles} from "@material-ui/core";
 import axios from "axios";
 
 const nameId = "name";
 const passwordId = "password";
-
-const styles = theme => ({
-    loginForm: {
-        width: "200px",
-        margin: "0 auto",
-    },
-    button: {
-        marginTop: "8px"
-    }
-});
 
 const logInFunc = () => {
     const name = document.getElementById(nameId).value;
@@ -40,7 +29,7 @@ const logInFunc = () => {
 class LoginTab extends Component {
     render() {
         return (
-            <div className={this.props.classes.loginForm}>
+            <div >
                 <TextField
                     id={nameId}
                     name={nameId}
@@ -52,7 +41,7 @@ class LoginTab extends Component {
                     label="Password"
                     fullWidth
                     type="password"/>
-                <Button className={this.props.classes.button}
+                <Button
                         type="submit"
                         fullWidth
                         variant="contained"
@@ -65,4 +54,4 @@ class LoginTab extends Component {
     }
 }
 
-export default withStyles(styles)(LoginTab);
+export default LoginTab;

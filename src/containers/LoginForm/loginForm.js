@@ -1,52 +1,59 @@
 import React, {Component} from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import axios from "axios";
+import * as actions from '../../store/user/actions';
+import {connect} from "react-redux";
 
-const nameId = "name";
-const passwordId = "password";
+class LoginForm extends React.Component {
 
-const logInFunc = () => {
-    const name = document.getElementById(nameId).value;
-    const password = document.getElementById(passwordId).value;
-
-    axios({
-        method: 'post',
-        url: '/login',
-        data: {
-            name: name,
-            password: password
+    state = {
+        logInForm: {
+            login: "name",
+            password: "123"
         }
-    }).then((response) => {
-        console.log(response.data['answer']);
-    }).catch((e) => {
-        console.log(e);
-    }).then(() => {
+    };
 
-    });
-};
+    onSignInSubmit = (event) => {
+        event.preventDefault();
+        this.props.dispatch(
+            actions.fetchTokenFromServer(this.state.logInForm.login,
+                this.state.logInForm.password)
+        );
+    };
 
-class LoginTab extends Component {
+    handleTextChange = (key) => (event) => {
+        const newState = {
+            ...this.state,
+            logInForm: {
+                ...this.state.logInForm
+            }
+        };
+        newState.logInForm[key] = event.target.value;
+
+        this.setState(newState);
+    };
+
     render() {
         return (
             <div >
                 <TextField
-                    id={nameId}
-                    name={nameId}
                     label="Name"
-                    fullWidth/>
+                    fullWidth
+                    value={this.state.logInForm.login}
+                    onChange={this.handleTextChange}
+                />
                 <TextField
-                    id={passwordId}
-                    name={passwordId}
                     label="Password"
                     fullWidth
+                    value={this.state.logInForm.login}
+                    onChange={this.handleTextChange}
                     type="password"/>
                 <Button
                         type="submit"
                         fullWidth
                         variant="contained"
                         color="primary"
-                        onClick={logInFunc}>
+                        onClick={this.onSignInSubmit}>
                     Log In
                 </Button>
             </div>
@@ -54,4 +61,4 @@ class LoginTab extends Component {
     }
 }
 
-export default LoginTab;
+export default connect()(LoginForm);

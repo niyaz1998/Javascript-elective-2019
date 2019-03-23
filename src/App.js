@@ -19,11 +19,11 @@ class App extends Component {
     }
 
     render() {
+        console.log("token", this.props.token);
         if (this.props.token) {
             return (
                         <main>
                             <Switch>
-                                <Route path="/login" component={LoginTab}/>
                                 <Route path="/excursions_list" component={ExcursionsList}/>
                                 <Route path="/add_excursion" component={ExcursionInput}/>
                                 <Route path="/excursion/:id" component={() => <h1> Not implemented yet</h1>}/>

@@ -13,6 +13,7 @@ module.exports = (app) => {
     });
 
     app.post('/login', (request, response) => {
+        console.log("from stub server", "/login");
         if (request.body.name === 'name' && request.body.password === '123') {
             response.type('application/json').send({"answer": "correct password"})
         } else {

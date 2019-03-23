@@ -1,0 +1,1 @@
+export const EXCURSIONS_FETCHED = 'excursions.EXCURSIONS_FETCHED';

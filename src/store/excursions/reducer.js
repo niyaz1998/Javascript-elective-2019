@@ -7,9 +7,6 @@ import * as types from './actionTypes';
 // --------------------------------------------------
 
 const initialState = {
-  token: undefined,
-  accountType: -1,
-  excursions: {}, // maps id of excursion to it's data
 };
 
 // --------------------------------------------------
@@ -20,10 +17,12 @@ const initialState = {
 
 export default function reduce(state = initialState, action) {
   switch (action.type) {
-    case types.TOKEN_FETCHED:
+    case types.EXCURSIONS_FETCHED:
       return {
         ...state,
-        token: action.token,
+        status: action.status,
+        errorMessage: action.errorMessage,
+        excursionsMap: action.excursionsMap,
       };
     default:
       return state;
@@ -36,6 +35,10 @@ export default function reduce(state = initialState, action) {
 //
 // --------------------------------------------------
 
-export function getUserToken(state) {
-  return state.user.token;
+export function getExcursionsMap(state) {
+  return state.excursions.excursionsMap;
+}
+
+export function getExcursionLoadError(state) {
+  return state.excursions.errorMessage;
 }

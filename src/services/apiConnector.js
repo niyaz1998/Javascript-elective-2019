@@ -35,6 +35,22 @@ export async function signIn(login, pass) {
     }
 }
 
+// Implementation of request to /admin/excursions
+// Get all the excursions considering given filters and search parameters
+// Required data: token
+export async function getExcursions(token) {
+    if (token) {
+        return await get(
+            {token},
+            '/admin/excursions');
+    } else {
+        return {
+            status: -1,
+            error: "Missed required data"
+        }
+    }
+}
+
 ////////////////////////////////////////////////////////////////////
 /// Help functions                                               ///
 ////////////////////////////////////////////////////////////////////

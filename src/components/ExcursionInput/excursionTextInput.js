@@ -30,13 +30,10 @@ export class ExcursionInput extends React.Component {
     ];
 
     addListItem = (name, value) => {
-        console.log(name, value);
-        console.log(this.state.excursion[name]);
         if (!this.state.excursion[name]) {
             this.state.excursion[name] = [];
         }
         this.state.excursion[name] = this.state.excursion[name].concat([value]);
-        console.log(this.state.excursion);
         this.setState(this.state);
     };
 
@@ -66,7 +63,6 @@ export class ExcursionInput extends React.Component {
 
         newState.excursion[key] = value;
         this.setState(newState);
-        console.log(this.state.excursion);
     };
 
     render() {

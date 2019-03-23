@@ -1,50 +1,39 @@
 import React from "react"
-import axios from 'axios'
 import List from '@material-ui/core/List'
+import {connect} from "react-redux";
 
 import {ExcursionListItem} from '../../components/ExcursionListItem/excursionListItem'
+import {getExcursionsMap, getExcursionLoadError} from "../../store/excursions/reducer";
+import {fetchExcursion} from "../../store/excursions/actions";
+import {getUserToken} from "../../store/user/reducer";
+
 import styles from './excursionsList.css';
 
 
-export class ExcursionsList extends React.Component {
+class ExcursionsList extends React.Component {
 
-    state = {};
-
-    componentDidMount() {
-        this.loadExcursions();
+    constructor(props) {
+        super(props);
+        props.dispatch(fetchExcursion(props.token));
     }
-
-    loadExcursions = () => {
-        this.setState({error: void 0});
-        axios.get('/excursions')
-            .then(response => {
-                this.setState({excursions: response.data.excursions});
-                console.log(response.data.excursions);
-            })
-            .catch((err) => {
-                this.setState({
-                    error: 'Error occurred'
-                })
-            })
-    };
 
     render() {
 
-        if (this.state.error) {
-            return <h3>{this.state.error}</h3>
+        if (this.props.error && this.props.error.length > 0) {
+            return <h3>{this.props.error}</h3>
         }
 
-        if (!this.state.excursions) {
+        if (!this.props.excursionsMap) {
             return <h1>Loading...</h1>
         }
 
         return (
             <div>
                 <List className={styles.root}>
-                    {this.state.excursions.map((excursion) =>
+                    {Object.keys(this.props.excursionsMap).map((excursionID) =>
                         <ExcursionListItem
-                            key={excursion.id}
-                            excursion={excursion}
+                            key={excursionID}
+                            excursion={this.props.excursionsMap[excursionID]}
                         />
                     )}
                 </List>
@@ -52,3 +41,14 @@ export class ExcursionsList extends React.Component {
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        excursionsMap: getExcursionsMap(state),
+        token: getUserToken(state),
+        error: getExcursionLoadError(state),
+    }
+};
+
+
+export default connect(mapStateToProps)(ExcursionsList);

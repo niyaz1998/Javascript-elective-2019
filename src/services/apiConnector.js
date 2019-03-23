@@ -16,18 +16,17 @@ function checkNumber(number) {
         number : false;
 }
 
-// Implementation of request to /staff/login
+// Implementation of request to /admin/token
 // Get authorization token from server
-// Required data: email, password
-export async function signIn(name, password) {
-    if (name && password) {
-        return await post(
+// Required data: login, pass (md5_hash)
+export async function signIn(login, pass) {
+    if (login && pass) {
+        return await get(
             {
-                name,
-                password
+                login,
+                pass
             },
-            {},
-            '/login');
+            '/admin/token');
     } else {
         return {
             status: -1,

@@ -87,15 +87,6 @@ export class ExcursionInput extends React.Component {
                     title="Фотографии"
                     value={this.getValue("images")}
                     handleValueChange={this.handleValueChange("images")}/>
-                {
-                    /*
-                    < ExtendableList
-                    label={"services"}
-                    onAdd={this.addListItem}
-                    getValue={this.getListValue}
-                    />
-                    */
-                }
             </div>
         );
     }

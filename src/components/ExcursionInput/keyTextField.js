@@ -9,33 +9,35 @@ import styles from './excursionInput.css';
 // title - title of the text field
 export class MyTextField extends React.Component {
 
-    state = {
-        value: ""
-    };
-
     constructor(props) {
         super(props);
-        if (props.initValue) {
-            this.state.value = props.initValue;
-        }
     }
 
-    handleTextChange = event => {
-        this.state.value = event.target.value;
-        this.setState(
-            this.state
-        );
-        this.props.setKeyValue(this.props.label, this.state.value);
+    onNumberChange = (event) => {
+        let value = event.target.value;
+        if (!isNaN(value) && value.toString().indexOf('.') !== -1) {
+            this.props.onChange(event);
+        }
     };
 
     render() {
+        if (this.props.inputType === 'number') {
+            return (
+                <TextField
+                    className={styles.textField}
+                    label={this.props.title}
+                    value={this.props.value}
+                    onChange={this.onNumberChange}
+                    margin="normal"
+                />
+            );
+        }
         return (
             <TextField
                 className={styles.textField}
                 label={this.props.title}
-                value={this.state.value}
-                type={this.props.inputType}
-                onChange={this.handleTextChange}
+                value={this.props.value}
+                onChange={this.props.onChange}
                 margin="normal"
             />
         );

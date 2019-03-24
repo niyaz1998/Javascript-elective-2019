@@ -29,68 +29,61 @@ export class ExcursionInput extends React.Component {
         {label: "price_child", title: "Стоимость для детей", inputType: "number"},
     ];
 
-    addListItem = (name, value) => {
-        if (!this.state.excursion[name]) {
-            this.state.excursion[name] = [];
-        }
-        this.state.excursion[name] = this.state.excursion[name].concat([value]);
-        this.setState(this.state);
-    };
-
-    getListValue = name => {
-        if (!this.state.excursion[name]) {
-            return [];
-        } else {
-            return this.state.excursion[name];
-        }
-    };
-
     constructor(props) {
         super(props);
         if (props && props.excursion) {
             this.state.excursion = props.excursion;
         }
-    }
+    };
 
-    setKeyValue = (key, value) => {
 
+    handleTextChange = (key) => (event) => {
         const newState = {
             ...this.state,
             excursion: {
                 ...this.state.excursion
             }
         };
+        newState.excursion[key] = event.target.value;
 
-        newState.excursion[key] = value;
         this.setState(newState);
     };
+
+    getValue = (key) => {
+        return this.state.excursion[key];
+    };
+
 
     render() {
 
         return (
             ///TODO: может быть вынести список текстовых полей в отдельный компонент
             <div>
-                <ExcursionDurationPicker setKeyValue={this.setKeyValue}/>
                 <List>
                     {this.textFields.map((pair) => (
                         <div key={pair.label}>
                             <MyTextField
                                 label={pair.label}
                                 title={pair.title}
-                                setKeyValue={this.setKeyValue}
-                                initValue={this.state.excursion[pair.label]}
-                                inputType={this.inputType}
+                                onChange={this.handleTextChange(pair.label)}
+                                value={this.getValue(pair.label)}
+                                inputType={pair.inputType}
                             />
                         </div>
                     ))}
                 </List>
-                <ExtendableList
+                {
+                    /*
+                    <ExcursionDurationPicker setKeyValue={this.setKeyValue}/>
+                    < ExtendableList
                     label={"services"}
                     onAdd={this.addListItem}
                     getValue={this.getListValue}
-                />
-                <ExcursionTypeSelector setKeyValue={this.setKeyValue}/>
-                <ExcursionServicesSelector setKeyValue={this.setKeyValue}/>
+                    />
+                    <ExcursionTypeSelector setKeyValue={this.setKeyValue}/>
+                    <ExcursionServicesSelector setKeyValue={this.setKeyValue}/>
+                    */
+                }
             </div>
         );
     }

@@ -2,7 +2,7 @@ import React from 'react';
 
 
 import styles from './excursionInput.css';
-import {List} from "@material-ui/core";
+import {List, Typography} from "@material-ui/core";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 
@@ -79,9 +79,9 @@ export class ExcursionServicesSelector extends React.Component {
     render() {
         return (
             <div>
-                <div>
+                <Typography>
                     Выберите сервисы экскурсии
-                </div>
+                </Typography>
                 <div className={styles.servicesMainContainer}>
                     {Object.keys(this.state).map((code) => (
                         <div key={code}>

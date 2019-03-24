@@ -1,14 +1,11 @@
 import React from 'react';
-import TextField from '@material-ui/core/TextField';
+import {ExcursionTypeSelector} from "./excursionTypeSelector"
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import PlayListAdd from "@material-ui/icons/PlaylistAdd";
 
 import {MyTextField} from "./keyTextField";
-import {ExcursionTypeSelector} from "./excursionTypeSelector"
 import {ExcursionServicesSelector} from "./excursionServisesSelector";
 import {ExcursionTimePicker} from "./excursionTimePicker";
+import {ExtendableList} from './extendableList';
 
 import styles from './excursionInput.css';
 import {IconButton} from "@material-ui/core";
@@ -84,6 +81,10 @@ export class ExcursionInput extends React.Component {
                 <ExcursionServicesSelector
                     onChange={this.handleValueChange("services")}
                     services={this.getValue("services")}/>
+                <ExtendableList
+                    title="Фотографии"
+                    value={this.getValue("images")}
+                    handleValueChange={this.handleValueChange("images")}/>
                 {
                     /*
                     < ExtendableList
@@ -98,58 +99,4 @@ export class ExcursionInput extends React.Component {
         );
     }
 
-}
-
-class ExtendableList extends React.Component {
-
-    state = {
-        value: ""
-    };
-
-    onChange = event => {
-        this.state.value = event.target.value;
-        this.setState(
-            this.state
-        );
-    };
-
-    onButtonClick = (onItemAdd) => () => {
-        if (this.state.value && this.state.value !== "") {
-            onItemAdd(this.props.label, this.state.value);
-            this.state.value = "";
-            this.setState(this.state);
-        }
-    };
-
-
-    render() {
-        return (
-            <div>
-                <div>
-                    Начало увеличиваемого списка
-                </div>
-                <List className={styles.extendableList}>
-                    {this.props.getValue(this.props.label).map((text, i) => (
-                        <ListItem key={i}>
-                            <ListItemText primary={text}/>
-                        </ListItem>
-                    ))}
-                    <div>
-                        <TextField
-                            className={styles.textField}
-                            value={this.state.value}
-                            onChange={this.onChange}
-                            margin="normal"
-                        />
-                        <IconButton
-                            className={styles.iconButton}
-                            color="primary"
-                            onClick={this.onButtonClick(this.props.onAdd)}>
-                            <PlayListAdd/>
-                        </IconButton>
-                    </div>
-                </List>
-            </div>
-        );
-    }
 }

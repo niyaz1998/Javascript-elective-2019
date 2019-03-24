@@ -8,7 +8,6 @@ import {ExcursionTimePicker} from "./excursionTimePicker";
 import {ExtendableList} from './extendableList';
 
 import styles from './excursionInput.css';
-import {IconButton} from "@material-ui/core";
 import {MinutesToHH_MM} from "../../services/timeHelper";
 
 
@@ -70,6 +69,9 @@ export class ExcursionInput extends React.Component {
                         </div>
                     ))}
                 </List>
+                <ExcursionTypeSelector
+                    handleValueChange={this.handleValueChange("type")}
+                    value={this.getValue("type")}/>
                 <ExcursionTimePicker
                     onChange={this.handleValueChange("start_time")}
                     title="Начало"
@@ -92,7 +94,6 @@ export class ExcursionInput extends React.Component {
                     onAdd={this.addListItem}
                     getValue={this.getListValue}
                     />
-                    <ExcursionTypeSelector setKeyValue={this.setKeyValue}/>
                     */
                 }
             </div>

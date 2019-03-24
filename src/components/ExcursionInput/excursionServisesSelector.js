@@ -2,7 +2,7 @@ import React from 'react';
 
 
 import styles from './excursionInput.css';
-import {List, Typography} from "@material-ui/core";
+import {Typography} from "@material-ui/core";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 
@@ -90,8 +90,7 @@ export class ExcursionServicesSelector extends React.Component {
                                     checked={this.state[code].select}
                                     onChange={this.onSelect(code)}
                                     color="primary"
-                                />
-                                }
+                                />}
                                 label={this.state[code].text}
                             />
                         </div>

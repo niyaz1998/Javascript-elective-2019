@@ -2,17 +2,17 @@ import React from 'react';
 
 
 import styles from './excursionInput.css';
-import {Button, List} from "@material-ui/core";
+import {Button, List, Typography} from "@material-ui/core";
 
-const types = [
-    {code: "WTCH", text: "Обзорная"},
-    {code: "HSTR", text: "Историческая"},
-    {code: "FOOD", text: "Гастрономическая"},
-    {code: "CULT", text: "Культурная"},
-    {code: "WAVE", text: "Морская"},
-    {code: "SURF", text: "Спортивная"},
-    {code: "CONF", text: "Развлекательная"},
-];
+const types = {
+    "WTCH": "Обзорная",
+    "HSTR": "Историческая",
+    "FOOD": "Гастрономическая",
+    "CULT": "Культурная",
+    "WAVE": "Морская",
+    "SURF": "Спортивная",
+    "CONF": "Развлекательная",
+};
 
 // handleChange - function that will be called when value changes
 // label - value that will be passed to handleChange function
@@ -20,40 +20,31 @@ const types = [
 // title - title of the text field
 export class ExcursionTypeSelector extends React.Component {
 
-    state = {
-        type: ""
-    };
-
     getButtonColor(code) {
-        if (code === this.state.type) {
+        if (code === this.props.value) {
             return "primary";
         }
         return "default";
     }
 
-    onClick = (code) => () => {
-        this.setState(
-            {
-                type: code
-            }
-        );
-        this.props.setKeyValue("type", code);
+    onChange = (key) => () => {
+        this.props.handleValueChange(key);
     };
 
     render() {
         return (
             <div>
-                <div>
+                <Typography>
                     Выберите тип экскурсии
-                </div>
+                </Typography>
                 <List className={styles.horizontalList}>
-                    {types.map((type) => (
-                        <div className={styles.selectableButton} key={type.code}>
+                    {Object.keys(types).map((key) => (
+                        <div className={styles.selectableButton} key={key}>
                             <Button
                                 variant="contained"
-                                color={this.getButtonColor(type.code)}
-                                onClick={this.onClick(type.code)}>
-                                {type.text}
+                                color={this.getButtonColor(key)}
+                                onClick={this.onChange(key)}>
+                                {types[key]}
                             </Button>
                         </div>
                     ))}

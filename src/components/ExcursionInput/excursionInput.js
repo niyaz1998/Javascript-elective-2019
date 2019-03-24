@@ -10,7 +10,7 @@ import {ExcursionTypeSelector} from "./excursionTypeSelector"
 import {ExcursionServicesSelector} from "./excursionServisesSelector";
 import {ExcursionDurationPicker} from "./durationTimePicker";
 
-import styles from './excursionTextInput.css';
+import styles from './excursionInput.css';
 import {IconButton} from "@material-ui/core";
 
 

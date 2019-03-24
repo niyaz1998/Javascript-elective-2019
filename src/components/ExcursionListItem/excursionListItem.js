@@ -19,7 +19,6 @@ starting_point, available_dates, price_adult, price_child
 class ExcursionListItem extends React.Component {
 
     onEditClick = (id) => () => {
-        console.log("history", this.props.history);
         this.props.history.push(`/excursion/${id}`)
     };
 

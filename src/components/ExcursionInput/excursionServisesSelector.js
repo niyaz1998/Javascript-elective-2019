@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-import styles from './excursionTextInput.css';
+import styles from './excursionInput.css';
 import {List} from "@material-ui/core";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";

@@ -3,7 +3,8 @@ import {Route, Switch, Redirect, withRouter} from 'react-router-dom';
 
 import LoginTab from "./containers/LoginForm/loginForm";
 import ExcursionsList from "./containers/ExcursionList/excursionsList"
-import {ExcursionInput} from "./components/ExcursionInput/excursionTextInput";
+import {ExcursionInput} from "./components/ExcursionInput/excursionInput";
+import ExcursionEdit from "./containers/ExcursionEditPage/excursionEditPage";
 import {fetchTokenFromCookies} from "./store/user/actions";
 
 import {connect} from 'react-redux';
@@ -23,7 +24,7 @@ class App extends Component {
                     <Switch>
                         <Route path="/excursions_list" component={ExcursionsList}/>
                         <Route path="/add_excursion" component={ExcursionInput}/>
-                        <Route path="/excursion/:id" component={() => <h1> Not implemented yet</h1>}/>
+                        <Route path="/excursion/:id" component={ExcursionEdit}/>
                         <Redirect from="*" to="/excursions_list"/>
                     </Switch>
                 </main>

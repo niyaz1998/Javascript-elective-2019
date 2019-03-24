@@ -16,8 +16,12 @@ export class MyTextField extends React.Component {
     onNumberChange = (event) => {
         let value = event.target.value;
         if (!isNaN(value) && value.toString().indexOf('.') !== -1) {
-            this.props.onChange(event);
+            this.props.onChange(value);
         }
+    };
+
+    onTextChange = (event) => {
+        this.props.onChange(event.target.value);
     };
 
     render() {
@@ -37,7 +41,7 @@ export class MyTextField extends React.Component {
                 className={styles.textField}
                 label={this.props.title}
                 value={this.props.value}
-                onChange={this.props.onChange}
+                onChange={this.onTextChange}
                 margin="normal"
             />
         );

@@ -10,7 +10,6 @@ export class ExcursionEdit extends React.Component {
     render() {
         const excursion = this.props.excursionsMap[this.props.match.params.id];
 
-        console.log("excursion for edit", excursion);
         return (
             <div>
                 <ExcursionInput excursion={excursion}/>
@@ -20,7 +19,6 @@ export class ExcursionEdit extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log("state", state);
     return {
         excursionsMap: getExcursionsMap(state),
     }

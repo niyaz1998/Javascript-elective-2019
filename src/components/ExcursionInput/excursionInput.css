@@ -31,3 +31,9 @@
 .timeField {
     width: 200px;
 }
+
+.servicesMainContainer {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}

@@ -8,10 +8,11 @@ import PlayListAdd from "@material-ui/icons/PlaylistAdd";
 import {MyTextField} from "./keyTextField";
 import {ExcursionTypeSelector} from "./excursionTypeSelector"
 import {ExcursionServicesSelector} from "./excursionServisesSelector";
-import {ExcursionDurationPicker} from "./durationTimePicker";
+import {ExcursionTimePicker} from "./excursionTimePicker";
 
 import styles from './excursionInput.css';
 import {IconButton} from "@material-ui/core";
+import {MinutesToHH_MM} from "../../services/timeHelper";
 
 
 export class ExcursionInput extends React.Component {
@@ -37,14 +38,14 @@ export class ExcursionInput extends React.Component {
     };
 
 
-    handleTextChange = (key) => (event) => {
+    handleValueChange = (key) => (value) => {
         const newState = {
             ...this.state,
             excursion: {
                 ...this.state.excursion
             }
         };
-        newState.excursion[key] = event.target.value;
+        newState.excursion[key] = value;
 
         this.setState(newState);
     };
@@ -65,23 +66,32 @@ export class ExcursionInput extends React.Component {
                             <MyTextField
                                 label={pair.label}
                                 title={pair.title}
-                                onChange={this.handleTextChange(pair.label)}
+                                onChange={this.handleValueChange(pair.label)}
                                 value={this.getValue(pair.label)}
                                 inputType={pair.inputType}
                             />
                         </div>
                     ))}
                 </List>
+                <ExcursionTimePicker
+                    onChange={this.handleValueChange("start_time")}
+                    title="Начало"
+                    value={this.getValue("start_time")}/>
+                <ExcursionTimePicker
+                    onChange={this.handleValueChange("duration")}
+                    title="Длительность"
+                    value={MinutesToHH_MM(this.getValue("duration"))}/>
+                <ExcursionServicesSelector
+                    onChange={this.handleValueChange("services")}
+                    services={this.getValue("services")}/>
                 {
                     /*
-                    <ExcursionDurationPicker setKeyValue={this.setKeyValue}/>
                     < ExtendableList
                     label={"services"}
                     onAdd={this.addListItem}
                     getValue={this.getListValue}
                     />
                     <ExcursionTypeSelector setKeyValue={this.setKeyValue}/>
-                    <ExcursionServicesSelector setKeyValue={this.setKeyValue}/>
                     */
                 }
             </div>

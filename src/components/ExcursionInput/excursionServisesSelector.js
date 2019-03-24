@@ -43,6 +43,13 @@ const services = [
 // title - title of the text field
 export class ExcursionServicesSelector extends React.Component {
 
+    constructor(props) {
+        super(props);
+        props.services.forEach((service) => {
+            this.state[service].select = true;
+        })
+    }
+
     state = {
         HUMN: {text: "Экскурсовод", select: false},
         LINE: {text: "Пешеходный маршрут", select: false},
@@ -66,7 +73,7 @@ export class ExcursionServicesSelector extends React.Component {
                 result.push(code);
             }
         }
-        this.props.setKeyValue("services", result);
+        this.props.onChange("services", result);
     };
 
     render() {
@@ -75,7 +82,7 @@ export class ExcursionServicesSelector extends React.Component {
                 <div>
                     Выберите сервисы экскурсии
                 </div>
-                <List>
+                <div className={styles.servicesMainContainer}>
                     {Object.keys(this.state).map((code) => (
                         <div key={code}>
                             <FormControlLabel
@@ -89,7 +96,7 @@ export class ExcursionServicesSelector extends React.Component {
                             />
                         </div>
                     ))}
-                </List>
+                </div>
             </div>
         );
     }

@@ -45,9 +45,11 @@ export class ExcursionServicesSelector extends React.Component {
 
     constructor(props) {
         super(props);
-        props.services.forEach((service) => {
-            this.state[service].select = true;
-        })
+        if (props.services) {
+            props.services.forEach((service) => {
+                this.state[service].select = true;
+            })
+        }
     }
 
     state = {

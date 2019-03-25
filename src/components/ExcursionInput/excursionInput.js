@@ -14,7 +14,22 @@ import {MinutesToHH_MM} from "../../services/timeHelper";
 export class ExcursionInput extends React.Component {
 
     state = {
-        excursion: {}
+        excursion: {
+            id: undefined,
+            region: undefined,
+            title: undefined,
+            price: undefined,
+            start_time: undefined,
+            duration: undefined,
+            services: [],
+            type: undefined,
+            images: [],
+            description: undefined,
+            starting_point: undefined,
+            available_dates: [],
+            price_adult: undefined,
+            price_child: undefined
+        }
     };
 
     textFields = [
@@ -30,6 +45,9 @@ export class ExcursionInput extends React.Component {
         super(props);
         if (props && props.excursion) {
             this.state.excursion = props.excursion;
+            this.state.excursion.duration = MinutesToHH_MM(this.state.excursion.duration);
+        } else {
+
         }
     };
 
@@ -79,7 +97,7 @@ export class ExcursionInput extends React.Component {
                 <ExcursionTimePicker
                     onChange={this.handleValueChange("duration")}
                     title="Длительность"
-                    value={MinutesToHH_MM(this.getValue("duration"))}/>
+                    value={this.getValue("duration")}/>
                 <ExcursionServicesSelector
                     onChange={this.handleValueChange("services")}
                     services={this.getValue("services")}/>

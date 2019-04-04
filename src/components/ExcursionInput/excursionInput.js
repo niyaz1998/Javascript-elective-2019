@@ -46,8 +46,6 @@ export class ExcursionInput extends React.Component {
         if (props && props.excursion) {
             this.state.excursion = props.excursion;
             this.state.excursion.duration = MinutesToHH_MM(this.state.excursion.duration);
-        } else {
-
         }
     };
 
@@ -56,10 +54,10 @@ export class ExcursionInput extends React.Component {
         const newState = {
             ...this.state,
             excursion: {
-                ...this.state.excursion
+                ...this.state.excursion,
+                [key]: value
             }
         };
-        newState.excursion[key] = value;
 
         this.setState(newState);
     };

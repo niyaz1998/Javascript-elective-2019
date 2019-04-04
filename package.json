@@ -7,7 +7,7 @@
     "build": "webpack --mode production",
     "dev": "webpack-dev-server --port 10000",
     "start": "webpack-dev-server --mode development --open --hot --port 10000",
-    "stub": "cross-env BACKEND_URL=http://localhost:3000 npm run start"
+    "stub": "cross-env BACKEND_URL=http://0.0.0.0:10000 npm run start"
   },
   "repository": {
     "type": "git",

@@ -18,11 +18,9 @@ export class ExcursionEdit extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        excursionsMap: getExcursionsMap(state),
-    }
-};
+const mapStateToProps = (state) => ({
+    excursionsMap: getExcursionsMap(state),
+});
 
 
 export default connect(mapStateToProps)(ExcursionEdit);

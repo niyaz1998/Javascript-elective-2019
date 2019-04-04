@@ -9,12 +9,8 @@ import styles from './excursionInput.css';
 // title - title of the text field
 export class MyTextField extends React.Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     onNumberChange = (event) => {
-        let value = event.target.value;
+        const value = event.target.value;
         if (!isNaN(value) && value.toString().indexOf('.') !== -1) {
             this.props.onChange(value);
         }

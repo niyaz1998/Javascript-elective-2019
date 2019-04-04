@@ -24,13 +24,12 @@ export class ExtendableList extends React.Component {
 
     onButtonClick = () => {
         if (this.state.value && this.state.value !== "") {
-            let newArray = this.props.value.slice();
-            newArray.push(this.state.value);
+            let newArray = [...this.props.value, this.state.value];
             this.props.handleValueChange(newArray);
             const newState = {
-                ...this.state
+                ...this.state,
+                value: ""
             };
-            newState.value = "";
             this.setState(newState);
         }
     };

@@ -67,8 +67,11 @@ export class ExcursionServicesSelector extends React.Component {
     };
 
     onSelect = (code) => () => {
-        this.state[code].select = !this.state[code].select;
-        this.setState(this.state);
+        const newState = {
+            ...this.state
+        };
+        newState[code].select = !this.state[code].select;
+        this.setState(newState);
         let result = [];
         for (code in this.state) {
             if (this.state[code].select) {

@@ -5,7 +5,7 @@ const webpack = require("webpack");
 const buildStubServer = require('./stub/server');
 
 module.exports = {
-    entry: "./src/index.js",
+    entry: ['babel-polyfill', "./src/index.js"],
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'index_bundle.js',
@@ -37,7 +37,7 @@ module.exports = {
             template: "./src/index.html"
         }),
         new webpack.DefinePlugin({
-            BACKEND_URL: `"${process.env.BACKEND_URL}"`
+            BACKEND_URL: `"${process.env.BACKEND_URL || "http://0.0.0.0:5000"}"`
         })
     ],
     devServer: {

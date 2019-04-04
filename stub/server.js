@@ -8,15 +8,14 @@ module.exports = (app) => {
     app.use(bodyParser.json());
 
     app.get('/excursions', (request, response) => {
-        console.log('get excursions');
         response.type('application/json').send(excursions)
     });
 
-    app.post('/login', (request, response) => {
+    app.post('/admin/token', (request, response) => {
         if (request.body.name === 'name' && request.body.password === '123') {
-            response.type('application/json').send({"answer": "correct password"})
+            response.type('application/json').send({"token": "this_is_token", "status": 0, "errorMessage": ""})
         } else {
-            response.type('application/json').send({"answer": "incorrect password"})
+            response.type('application/json').send({"token": "", "status": -1, "errorMessage": "incorrect password"})
         }
     });
 };

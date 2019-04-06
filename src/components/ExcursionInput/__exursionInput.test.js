@@ -1,6 +1,4 @@
 import React from 'react';
-import {MyTextField} from './keyTextField';
-import renderer from 'react-test-renderer'
 
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
@@ -11,17 +9,22 @@ Enzyme.configure({adapter: new Adapter()});
 import {shallow, mount, render} from 'enzyme';
 import {ExtendableList} from "./extendableList";
 import {ExcursionTypeSelector} from "./excursionTypeSelector";
+import {MyTextField} from "./keyTextField";
+import {ExcursionTimePicker} from "./excursionTimePicker";
+import styles from "./excursionInput.css";
+import {ExcursionServicesSelector} from "./excursionServisesSelector";
+import {ExcursionInput} from "./excursionInput";
 
-describe('My input text field', () => {
+describe('Excursion Input', () => {
     it('test component', () => {
-        const funct = (key) => (value) => {
+        const someFunction = (key) => (value) => {
             console.log(key, value);
         };
 
         const shallowComponent = shallow(<MyTextField
             label={"label"}
             title={"title"}
-            onChange={funct("label")}
+            onChange={someFunction("label")}
             value={"value"}/>);
         expect(shallowComponent.debug()).toMatchSnapshot();
 
@@ -29,7 +32,7 @@ describe('My input text field', () => {
             label={"label"}
             title={"title"}
             inputType={"number"}
-            onChange={funct("label")}
+            onChange={someFunction("label")}
             value={"value"}/>);
         expect(shallow1.debug()).toMatchSnapshot();
         // Test lifecycle method calls and all possible component states
@@ -61,7 +64,6 @@ describe('My input text field', () => {
         expect(mockFn).toBeCalledTimes(7);
     });
 
-
     it('correct extendable list input', () => {
         const mockFn = jest.fn();
         const tree = mount(
@@ -80,12 +82,47 @@ describe('My input text field', () => {
         expect(mockFn).toBeCalledTimes(1);
     });
 
-
     it('excursions types selector', () => {
         const mockFn = jest.fn();
-        const tree = mount(
+        const tree = shallow(
             <ExcursionTypeSelector
                 handleValueChange={mockFn}/>
+        );
+        expect(tree.debug()).toMatchSnapshot();
+        const button = tree.find({children: "Обзорная"});
+        button.simulate('click');
+        button.simulate('click');
+        expect(mockFn).toBeCalledTimes(2);
+    });
+
+    it('excursion time picker', () => {
+        const tree = mount(
+            <ExcursionTimePicker
+                onChange={() => {}}
+                title="Начало"/>
+        );
+        expect(tree.debug()).toMatchSnapshot();
+    });
+
+    it('excursion services selector', () => {
+        const mockFn = jest.fn();
+        const tree = mount(
+            <ExcursionServicesSelector
+                onChange={mockFn}
+                services={[]}/>
+        );
+        expect(tree.debug()).toMatchSnapshot();
+        const button1 = tree.findWhere(n => n.key() === 'HUMN').find('input');
+        button1.simulate('change');
+        button1.simulate('change');
+        const button2 = tree.findWhere(n => n.key() === 'FORK').find('input');
+        button2.simulate('change');
+        expect(mockFn).toBeCalledTimes(3);
+    });
+
+    it('excursion whole input', () => {
+        const tree = mount(
+            <ExcursionInput/>
         );
         expect(tree.debug()).toMatchSnapshot();
     });

@@ -9,6 +9,7 @@ Enzyme.configure({adapter: new Adapter()});
 
 
 import {shallow, mount, render} from 'enzyme';
+import {ExtendableList} from "./extendableList";
 
 describe('My input text field', () => {
     it('test component', () => {
@@ -56,5 +57,23 @@ describe('My input text field', () => {
         tree.simulate('change', { target: { value: '.' } });
         tree.simulate('change', { target: { value: '0.' } });
         expect(mockFn).toBeCalledTimes(7);
-    })
+    });
+
+
+    it('correct extendable list input', () => {
+        const mockFn = jest.fn();
+        const tree = mount(
+            <ExtendableList
+                title="Фотографии"
+                value={['a', 'b', 'c']}
+                handleValueChange={mockFn}/>
+        );
+        const input = tree.find('input');
+        const button = tree.find('button');
+        input.simulate('change', { target: { value: 'dasda' } });
+        button.simulate('click');
+        input.simulate('change', { target: { value: '' } });
+        button.simulate('click');
+        expect(mockFn).toBeCalledTimes(1);
+    });
 });

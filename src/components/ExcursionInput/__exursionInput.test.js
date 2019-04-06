@@ -10,6 +10,7 @@ Enzyme.configure({adapter: new Adapter()});
 
 import {shallow, mount, render} from 'enzyme';
 import {ExtendableList} from "./extendableList";
+import {ExcursionTypeSelector} from "./excursionTypeSelector";
 
 describe('My input text field', () => {
     it('test component', () => {
@@ -47,6 +48,7 @@ describe('My input text field', () => {
                 onChange={mockFn}
                 value={"value"}/>
         );
+        expect(tree.debug()).toMatchSnapshot();
         tree.simulate('change', { target: { value: '123' } });
         tree.simulate('change', { target: { value: 'das' } });
         tree.simulate('change', { target: { value: '123.' } });
@@ -68,6 +70,7 @@ describe('My input text field', () => {
                 value={['a', 'b', 'c']}
                 handleValueChange={mockFn}/>
         );
+        expect(tree.debug()).toMatchSnapshot();
         const input = tree.find('input');
         const button = tree.find('button');
         input.simulate('change', { target: { value: 'dasda' } });
@@ -75,5 +78,15 @@ describe('My input text field', () => {
         input.simulate('change', { target: { value: '' } });
         button.simulate('click');
         expect(mockFn).toBeCalledTimes(1);
+    });
+
+
+    it('excursions types selector', () => {
+        const mockFn = jest.fn();
+        const tree = mount(
+            <ExcursionTypeSelector
+                handleValueChange={mockFn}/>
+        );
+        expect(tree.debug()).toMatchSnapshot();
     });
 });

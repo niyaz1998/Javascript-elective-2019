@@ -1,17 +1,14 @@
 import React from 'react';
-
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-
 Enzyme.configure({adapter: new Adapter()});
-
-
 import {shallow, mount, render} from 'enzyme';
+
+
 import {ExtendableList} from "./extendableList";
 import {ExcursionTypeSelector} from "./excursionTypeSelector";
 import {MyTextField} from "./keyTextField";
 import {ExcursionTimePicker} from "./excursionTimePicker";
-import styles from "./excursionInput.css";
 import {ExcursionServicesSelector} from "./excursionServisesSelector";
 import {ExcursionInput} from "./excursionInput";
 

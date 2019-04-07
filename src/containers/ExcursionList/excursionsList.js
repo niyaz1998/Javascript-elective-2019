@@ -16,7 +16,7 @@ class ExcursionsList extends React.Component {
 
     constructor(props) {
         super(props);
-        props.dispatch(fetchExcursion(props.token));
+        props.fetchExcursion(props.token);
     }
 
     onAddClick = () => {
@@ -60,5 +60,8 @@ const mapStateToProps = (state) => {
     }
 };
 
+const mapDispatchToProps = (dispatch) => ({
+    fetchExcursion: (token) => dispatch(fetchExcursion(token))
+});
 
-export default connect(mapStateToProps)(ExcursionsList);
+export default connect(mapStateToProps, mapDispatchToProps)(ExcursionsList);

@@ -60,19 +60,25 @@ export async function getExcursions(token) {
 // url will be formed as BASE_URL + URL
 // params is an object with params. OBJECT, this is important
 async function get(params, URL) {
+    console.log(1);
     if (params && URL) {
         const url = BASE_URL + URL;
+        console.log(2);
 
         try {
+            console.log(3);
             const response = await axios.get(url, {
                     params: params,
                     headers: {'Content-Type': 'application/json'}
                 }
             );
+            console.log(4);
 
             if (response.status === 200) {
+                console.log(5);
                 return response.data;
             } else {
+                console.log(6);
                 return {
                     status: -1,
                     error_message: 'Something went wrong... Server returned code '
@@ -80,12 +86,14 @@ async function get(params, URL) {
                 };
             }
         } catch (e) {
+            console.log(7);
             return {
                 status: -1,
                 error_message: 'Something went wrong... ' + e
             };
         }
     } else {
+        console.log(8);
         return {
             status: -1,
             error_message: "Missed required data"

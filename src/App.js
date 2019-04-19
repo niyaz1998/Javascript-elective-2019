@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {Route, Switch, Redirect, withRouter} from 'react-router-dom';
 
-import LoginTab from "./containers/LoginForm/loginForm";
+import LoginTab from "./containers/LoginPage/loginPage";
 import ExcursionsList from "./containers/ExcursionList/excursionsList"
 import {ExcursionInput} from "./components/ExcursionInput/excursionInput";
 import ExcursionEdit from "./containers/ExcursionEditPage/excursionEditPage";
@@ -31,10 +31,12 @@ class App extends Component {
             );
         } else {
             return (
-                <Switch>
-                    <Route path="/login" component={LoginTab}/>
-                    <Redirect from="*" to="/login"/>
-                </Switch>);
+                <main>
+                    <Switch>
+                        <Route path="/login" component={LoginTab}/>
+                        <Redirect from="*" to="/login"/>
+                    </Switch>
+                </main>);
         }
     }
 }

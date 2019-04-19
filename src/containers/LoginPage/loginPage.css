@@ -1,0 +1,13 @@
+.loginContainer {
+    width: 300px;
+}
+
+.loginPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.textInput {
+    margin-top: 8px;
+}

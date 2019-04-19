@@ -10,7 +10,7 @@ import * as types from "./actionTypes";
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
-describe('CharactersList', () => {
+describe('user actions test', () => {
 
 
     beforeEach(function () {
@@ -21,7 +21,7 @@ describe('CharactersList', () => {
         moxios.uninstall();
     });
 
-    it('test render empty component', (done) => {
+    it('test login function', (done) => {
         moxios.wait(() => {
             const request = moxios.requests.mostRecent();
             request.respondWith({

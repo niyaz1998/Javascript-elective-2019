@@ -16,7 +16,7 @@ class ExcursionsList extends React.Component {
 
     constructor(props) {
         super(props);
-        props.fetchExcursion(props.token);
+        props.fetchExcursion();
     }
 
     onAddClick = () => {
@@ -55,7 +55,6 @@ class ExcursionsList extends React.Component {
 const mapStateToProps = (state) => {
     return {
         excursionsMap: getExcursionsMap(state),
-        token: getUserToken(state),
         error: getExcursionLoadError(state),
     }
 };

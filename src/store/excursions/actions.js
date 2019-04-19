@@ -2,43 +2,32 @@ import * as api from "../../services/apiConnector";
 import * as Cookies from 'js-cookie';
 
 import * as types from './actionTypes';
+import {getUserToken} from "../user/reducer";
 
-export function fetchExcursion(token) {
+export function fetchExcursion() {
     return async (dispatch, getState) => {
-        let data = Cookies.get('excursions-data');
-        if (typeof (data) == 'string') {
-            data = JSON.parse(data);
+        const resp = await api.getExcursions(getUserToken(getState()));
+        if (resp.status === 0) {
+
+            let excursionsMap = {};
+            resp.excursions.forEach((excursion) => {
+                excursionsMap[excursion.id] = excursion;
+            });
+
+            const data = {
+                status: resp.status,
+                errorMessage: resp.errorMessage,
+                excursionsMap: excursionsMap,
+            };
+
+            // Resolve fetching process
             dispatch({
                 type: types.EXCURSIONS_FETCHED,
                 ...data
             });
+            //dispatch(actionCenter.finishAction("fetching token"));
         } else {
-            const resp = await api.getExcursions(token);
-            if (resp.status === 0) {
-
-                let excursionsMap = {};
-                resp.excursions.forEach((excursion) => {
-                    excursionsMap[excursion.id] = excursion;
-                });
-
-                const data = {
-                    status: resp.status,
-                    errorMessage: resp.errorMessage,
-                    excursionsMap: excursionsMap,
-                };
-
-                // Place data in cookies
-                Cookies.set('excursions-data', JSON.stringify(data));
-
-                // Resolve fetching process
-                dispatch({
-                    type: types.EXCURSIONS_FETCHED,
-                    ...data
-                });
-                //dispatch(actionCenter.finishAction("fetching token"));
-            } else {
-                //dispatch(actionCenter.failAction("fetching token", resp.error_message));
-            }
+            //dispatch(actionCenter.failAction("fetching token", resp.error_message));
         }
     }
 }

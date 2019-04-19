@@ -1,10 +1,15 @@
-
 import moxios from 'moxios';
-import createStore from 'redux-mock-store';
+import axios from 'axios';
+import configureMockStore from 'redux-mock-store';
 import thunk from "redux-thunk";
 import {fetchTokenFromServer} from "./actions";
 import "babel-polyfill";
+import {applyMiddleware, combineReducers} from "redux";
+import * as reducers from '../reducers';
 
+
+const middlewares = [thunk];
+const mockStore = configureMockStore(middlewares);
 
 describe('CharactersList', () => {
 
@@ -17,17 +22,40 @@ describe('CharactersList', () => {
         moxios.uninstall();
     });
 
-    it('test render empty component', async () => {
-        const mockStore = createStore([thunk]);
-        const initialState = {};
-        const store = mockStore(initialState);
 
-        moxios.stubRequest('/admin/token', {
-            "token": "this_is_token", "status": 0, "errorMessage": ""
+
+    it('tests moxios', async (done)  => {
+
+        let onFulfilled = jest.fn();
+
+        moxios.stubRequest('/say/hello', {
+            status: 200,
+            responseText: 'hello'
         });
 
-        store.dispatch(await fetchTokenFromServer('login', 'password'));
-        console.log(store);
-        expect(store).toMatchSnapshot();
+        await axios.get('/say/hello');
+
+        moxios.wait(function () {
+            console.log('Kekeke');
+            done()
+        })
+    });
+
+    it('test render empty component', async (done) => {
+        moxios.stubRequest('/admin/token', {
+            status: 200,
+            response: {
+                "token": "this_is_token", "status": 200, "errorMessage": ""
+            }
+        });
+
+        const store = mockStore({});
+
+        //store.dispatch(fetchTokenFromServer('login', 'password'));
+
+        return store.dispatch(fetchTokenFromServer('login', 'password'))
+            .then(() => {
+                console.log(store.getActions());
+            });
     })
 });

@@ -1,5 +1,4 @@
-const excursions_list = {
-    'excursions': [
+const excursions_list = [
         {
             'id': 0,
             'title': 'Экскурсия 1',
@@ -25,7 +24,7 @@ const excursions_list = {
                     '08.03.2019',
                     '15.03.2019',
                 ],
-            'photos': [
+            'images': [
                 'https://arduff.files.wordpress.com/2008/10/norway-013.jpg',
                 'https://im0-tub-ru.yandex.net/i?id=37bff7b27c408b19bf0ed29d82874fad&n=33&w=225&h=150',
                 'http://travelbelka.ru/wp-content/uploads/2016/09/ARHIZ-OBL-1068x712.jpg']
@@ -58,11 +57,10 @@ const excursions_list = {
                     '09.03.2019',
                     '16.03.2019',
                 ],
-            'photos': [
+            'images': [
                 'http://radio1.news/files/image/05/26/88/lg!dou.jpg',
                 'https://im0-tub-ru.yandex.net/i?id=2daa20d0a05a8e2e5b92c5b98b666a10-l&n=13']
         }
-    ]
-};
+    ];
 
 module.exports = excursions_list;

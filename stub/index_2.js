@@ -27,7 +27,7 @@ app.get("/api/v3/search", (req, res) => {
 });
 
 app.get('/admin/excursions', (request, response) => {
-    response.type('application/json').send(excursions);
+    response.type('application/json').send({"status": 0, "errorMessage": "", "excursions": excursions});
 });
 
 app.get('/admin/token', (request, response) => {

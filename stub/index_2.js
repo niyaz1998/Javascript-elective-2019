@@ -7,7 +7,7 @@ const excursions = require('./data/excursions_list');
 const app = express();
 
 app.get("/api/v3/search", (req, res) => {
-  const page = req.query.page || 0
+  const page = req.query.page || 0;
 
   try {
     let mock = require(`./search/${page}`);
@@ -18,7 +18,7 @@ app.get("/api/v3/search", (req, res) => {
     axios
       .get(realUrl)
       .then((data) => {
-        console.log('Trying to save ', path.resolve(`./stub/search/${page}.json`))
+        console.log('Trying to save ', path.resolve(`./stub/search/${page}.json`));
         fs.writeFileSync(path.resolve(`./stub/search/${page}.json`), JSON.stringify(data.data));
         res.send(data.data);
       })
@@ -27,7 +27,7 @@ app.get("/api/v3/search", (req, res) => {
 });
 
 app.get('/admin/excursions', (request, response) => {
-    response.type('application/json').send({"status": 0, "errorMessage": "", "excursions": excursions});
+    response.type('application/json').send(excursions);
 });
 
 app.get('/admin/token', (request, response) => {

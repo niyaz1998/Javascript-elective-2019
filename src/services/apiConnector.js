@@ -80,6 +80,7 @@ async function get(params, URL) {
                 };
             }
         } catch (e) {
+            console.log(e);
             return {
                 status: -1,
                 error_message: 'Something went wrong... ' + e

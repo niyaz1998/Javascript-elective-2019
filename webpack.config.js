@@ -2,7 +2,6 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const webpack = require("webpack");
 
-const buildStubServer = require('./stub/server');
 const outDirectory = path.join(__dirname, 'dist');
 
 console.log("cross-env", process.env.BACKEND_URL);

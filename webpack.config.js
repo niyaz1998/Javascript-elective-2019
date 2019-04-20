@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const webpack = require("webpack");
 
 const buildStubServer = require('./stub/server');
+const outDirectory = path.join(__dirname, 'dist');
 
 module.exports = {
     entry: ['babel-polyfill', "./src/index.js"],
@@ -38,11 +39,13 @@ module.exports = {
         }),
         new webpack.DefinePlugin({
             BACKEND_URL: `"${process.env.BACKEND_URL || "http://0.0.0.0:5000"}"`
-        })
+        }),
+        //new CompressionPlugin
     ],
     devServer: {
+        contentBase: outDirectory,
         compress: true,
         historyApiFallback: true,
-        before: buildStubServer
-    },
+        port: 9000
+    }
 };

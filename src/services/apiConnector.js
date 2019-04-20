@@ -2,8 +2,8 @@
 
 import axios from 'axios';
 
-const BASE_URL = "http://0.0.0.0:5000";
-//const BASE_URL = BACKEND_URL;
+//const BASE_URL = "http://0.0.0.0:5000";
+const BASE_URL = BACKEND_URL;
 
 function checkString(string) {
     return typeof (string) == 'string' &&

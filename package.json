@@ -9,7 +9,7 @@
     "start": "webpack-dev-server --mode development --open --hot",
     "stub": "cross-env BACKEND_URL=http://0.0.0.0:10000 npm run start",
     "test": "jest",
-    "stub2": "set BACKEND_URL=http://localhost:8090&& nodemon ./stub/startServer"
+    "stub2": "cross-env BACKEND_URL=http://localhost:8090 nodemon ./stub/startServer"
   },
   "repository": {
     "type": "git",

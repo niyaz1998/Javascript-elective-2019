@@ -5,8 +5,11 @@ const webpack = require("webpack");
 const buildStubServer = require('./stub/server');
 const outDirectory = path.join(__dirname, 'dist');
 
+console.log("cross-env", process.env.BACKEND_URL);
+
 module.exports = {
-    entry: ['babel-polyfill', "./src/index.js"],
+    mode: "development",
+    entry: ["./src/index.js"],
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'index_bundle.js',
@@ -33,6 +36,7 @@ module.exports = {
             }
         ]
     },
+    devtool: "source-map",
     plugins: [
         new HtmlWebpackPlugin({
             template: "./src/index.html"

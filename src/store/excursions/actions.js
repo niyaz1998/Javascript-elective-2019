@@ -7,6 +7,7 @@ import {getUserToken} from "../user/reducer";
 export function fetchExcursion() {
     return async (dispatch, getState) => {
         const resp = await api.getExcursions(getUserToken(getState()));
+        console.log(resp);
         if (resp.status === 0) {
 
             let excursionsMap = {};

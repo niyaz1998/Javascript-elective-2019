@@ -9,6 +9,7 @@ import * as reducers from './store/reducers';
 import {createMuiTheme, MuiThemeProvider} from "@material-ui/core";
 import orange from "@material-ui/core/colors/orange";
 import {BrowserRouter} from "react-router-dom";
+import {composeWithDevTools} from 'redux-devtools-extension';
 
 /*
 axios.defaults.headers['Content-Type'] = 'application/json';
@@ -16,7 +17,7 @@ axios.defaults.baseURL = BACKEND_URL;
 */
 const store = createStore(
     combineReducers(reducers),
-    applyMiddleware(thunk)
+    composeWithDevTools(applyMiddleware(thunk))
 );
 
 const theme = createMuiTheme(

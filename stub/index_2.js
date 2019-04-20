@@ -27,12 +27,12 @@ app.get("/api/v3/search", (req, res) => {
 });
 
 app.get('/admin/excursions', (request, response) => {
-    response.type('application/json').send(excursions)
+    response.type('application/json').send(excursions);
 });
 
-app.post('/admin/token', (request, response) => {
+app.get('/admin/token', (request, response) => {
     console.log('admin/token');
-    if (request.body.name === 'name' && request.body.password === '123') {
+    if (request.query.login === 'name' && request.query.pass === '123') {
         response.type('application/json').send({"token": "this_is_token", "status": 0, "errorMessage": ""})
     } else {
         response.type('application/json').send({"token": "", "status": -1, "errorMessage": "incorrect password"})

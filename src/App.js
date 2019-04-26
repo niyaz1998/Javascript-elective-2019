@@ -3,7 +3,7 @@ import {Route, Switch, Redirect, withRouter} from 'react-router-dom';
 
 import LoginTab from "./containers/LoginPage/loginPage";
 import ExcursionsList from "./containers/ExcursionList/excursionsList"
-import {ExcursionInput} from "./components/ExcursionInput/excursionInput";
+import ExcursionInput from "./containers/ExcursionInput/excursionInput";
 import ExcursionEdit from "./containers/ExcursionEditPage/excursionEditPage";
 import {fetchTokenFromCookies} from "./store/user/actions";
 

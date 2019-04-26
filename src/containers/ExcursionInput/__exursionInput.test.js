@@ -10,7 +10,7 @@ import {ExcursionTypeSelector} from "./excursionTypeSelector";
 import {MyTextField} from "./keyTextField";
 import {ExcursionTimePicker} from "./excursionTimePicker";
 import {ExcursionServicesSelector} from "./excursionServisesSelector";
-import {ExcursionInput} from "./excursionInput";
+import ExcursionInput from "./excursionInput";
 
 describe('Excursion Input', () => {
     it('test component', () => {

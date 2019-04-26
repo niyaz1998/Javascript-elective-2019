@@ -52,6 +52,23 @@ export async function getExcursions(token) {
     }
 }
 
+// Implementation of request to /admin/excursions
+// Get all the excursions considering given filters and search parameters
+// Required data: token
+export async function newExcursion(token, excursion) {
+    if (token && excursion) {
+        return await post(
+            excursion,
+            {token},
+            '/admin/excursions');
+    } else {
+        return {
+            status: -1,
+            error: "Missed required data"
+        }
+    }
+}
+
 ////////////////////////////////////////////////////////////////////
 /// Help functions                                               ///
 ////////////////////////////////////////////////////////////////////

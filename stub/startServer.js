@@ -3,7 +3,7 @@ const hotClient = require('webpack-hot-client');
 const middleware = require('webpack-dev-middleware');
 const webpack = require('webpack');
 const config = require('../webpack.config');
-const app = require('./index_2');
+const app = require('./index');
 
 const compiler = webpack(config);
 const { publicPath } = config.output;

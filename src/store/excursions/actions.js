@@ -32,3 +32,21 @@ export function fetchExcursion() {
         }
     }
 }
+
+export function createNewExcursion(excursion) {
+    return async (dispatch, getState) => {
+        const resp = await api.newExcursion(getUserToken(getState()), excursion);
+        console.log(resp);
+        if (resp.status === 0) {
+
+            // Resolve fetching process
+            dispatch({
+                type: types.EXCURSION_CREATED,
+                id: resp.id
+            });
+            //dispatch(actionCenter.finishAction("fetching token"));
+        } else {
+            //dispatch(actionCenter.failAction("fetching token", resp.error_message));
+        }
+    }
+}

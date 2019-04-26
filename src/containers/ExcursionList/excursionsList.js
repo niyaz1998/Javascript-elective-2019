@@ -7,7 +7,6 @@ import AddIcon from '@material-ui/icons/Add';
 import ExcursionListItem from '../../components/ExcursionListItem/excursionListItem'
 import {getExcursionsMap, getExcursionLoadError} from "../../store/excursions/reducer";
 import {fetchExcursion} from "../../store/excursions/actions";
-import {getUserToken} from "../../store/user/reducer";
 
 import styles from './excursionsList.css';
 

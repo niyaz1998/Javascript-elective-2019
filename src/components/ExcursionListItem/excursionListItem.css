@@ -7,12 +7,18 @@
     width: 100%;
 }
 
+.imageContainer {
+}
+
 .image {
-    height: 200px;
+    object-fit: cover;
+    height: 250px;
+    width: 350px;
 }
 
 .details {
     width: 100%;
+    background-color: white;
 }
 
 .controls {

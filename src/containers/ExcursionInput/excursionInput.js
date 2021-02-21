@@ -1,17 +1,20 @@
 import React from 'react';
 import {ExcursionTypeSelector} from "./excursionTypeSelector"
-import List from '@material-ui/core/List';
+import List from '@material-ui/core/List/index';
 
 import {MyTextField} from "./keyTextField";
 import {ExcursionServicesSelector} from "./excursionServisesSelector";
 import {ExcursionTimePicker} from "./excursionTimePicker";
 import {ExtendableList} from './extendableList';
+import {connect} from "react-redux";
 
 import styles from './excursionInput.css';
 import {MinutesToHH_MM} from "../../services/timeHelper";
+import {Button} from "@material-ui/core";
+import {createNewExcursion} from "../../store/excursions/actions";
 
 
-export class ExcursionInput extends React.Component {
+class ExcursionInput extends React.Component {
 
     state = {
         excursion: {
@@ -50,27 +53,9 @@ export class ExcursionInput extends React.Component {
     };
 
 
-    handleValueChange = (key) => (value) => {
-        const newState = {
-            ...this.state,
-            excursion: {
-                ...this.state.excursion,
-                [key]: value
-            }
-        };
-
-        this.setState(newState);
-    };
-
-    getValue = (key) => {
-        return this.state.excursion[key];
-    };
-
-
     render() {
 
         return (
-            ///TODO: может быть вынести список текстовых полей в отдельный компонент
             <div>
                 <List>
                     {this.textFields.map((pair) => (
@@ -103,8 +88,37 @@ export class ExcursionInput extends React.Component {
                     title="Фотографии"
                     value={this.getValue("images")}
                     handleValueChange={this.handleValueChange("images")}/>
+                <Button
+                    onClick={this.onSubmit}
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    color="primary">
+                    Отправить
+                </Button>
             </div>
         );
-    }
+    };
 
+    onSubmit = () => {
+        this.props.dispatch(createNewExcursion(this.state.excursion));
+    };
+
+    handleValueChange = (key) => (value) => {
+        const newState = {
+            ...this.state,
+            excursion: {
+                ...this.state.excursion,
+                [key]: value
+            }
+        };
+
+        this.setState(newState);
+    };
+
+    getValue = (key) => {
+        return this.state.excursion[key];
+    };
 }
+
+export default connect()(ExcursionInput);

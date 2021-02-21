@@ -2,6 +2,7 @@
 
 import axios from 'axios';
 
+//const BASE_URL = "http://0.0.0.0:5000";
 const BASE_URL = BACKEND_URL;
 
 function checkString(string) {
@@ -51,6 +52,23 @@ export async function getExcursions(token) {
     }
 }
 
+// Implementation of request to /admin/excursions
+// Get all the excursions considering given filters and search parameters
+// Required data: token
+export async function newExcursion(token, excursion) {
+    if (token && excursion) {
+        return await post(
+            excursion,
+            {token},
+            '/admin/excursions');
+    } else {
+        return {
+            status: -1,
+            error: "Missed required data"
+        }
+    }
+}
+
 ////////////////////////////////////////////////////////////////////
 /// Help functions                                               ///
 ////////////////////////////////////////////////////////////////////
@@ -79,6 +97,7 @@ async function get(params, URL) {
                 };
             }
         } catch (e) {
+            console.log(e);
             return {
                 status: -1,
                 error_message: 'Something went wrong... ' + e

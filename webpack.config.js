@@ -2,10 +2,13 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const webpack = require("webpack");
 
-const buildStubServer = require('./stub/server');
+const outDirectory = path.join(__dirname, 'dist');
+
+console.log("cross-env", process.env.BACKEND_URL);
 
 module.exports = {
-    entry: ['babel-polyfill', "./src/index.js"],
+    mode: "development",
+    entry: ["./src/index.js"],
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'index_bundle.js',
@@ -32,17 +35,20 @@ module.exports = {
             }
         ]
     },
+    devtool: "source-map",
     plugins: [
         new HtmlWebpackPlugin({
             template: "./src/index.html"
         }),
         new webpack.DefinePlugin({
             BACKEND_URL: `"${process.env.BACKEND_URL || "http://0.0.0.0:5000"}"`
-        })
+        }),
+        //new CompressionPlugin
     ],
     devServer: {
+        contentBase: outDirectory,
         compress: true,
         historyApiFallback: true,
-        before: buildStubServer
-    },
+        port: 9000
+    }
 };

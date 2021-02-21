@@ -1,5 +1,6 @@
 import * as api from "../../services/apiConnector";
 import * as Cookies from 'js-cookie';
+import 'babel-polyfill';
 
 import * as types from './actionTypes';
 
@@ -23,6 +24,7 @@ export function fetchTokenFromServer(email, password) {
 
         // Send info to the server
         const resp = await api.signIn(email, password);
+        console.log(resp);
         if (resp.status === 0) {
             const data = {
                 token: resp.token,

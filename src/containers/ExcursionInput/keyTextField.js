@@ -1,6 +1,5 @@
 import React from 'react';
-import TextField from '@material-ui/core/TextField';
-
+import TextField from '@material-ui/core/TextField/index';
 
 import styles from './excursionInput.css';
 
@@ -11,7 +10,7 @@ export class MyTextField extends React.Component {
 
     onNumberChange = (event) => {
         const value = event.target.value;
-        if (!isNaN(value) && value.toString().indexOf('.') !== -1) {
+        if (!isNaN(value)) {
             this.props.onChange(value);
         }
     };

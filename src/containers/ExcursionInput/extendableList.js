@@ -1,12 +1,12 @@
 import React from "react";
 import styles from "./excursionInput.css";
 import {IconButton} from "@material-ui/core";
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
+import ListItem from '@material-ui/core/ListItem/index';
+import ListItemText from '@material-ui/core/ListItemText/index';
 import PlayListAdd from "@material-ui/icons/PlaylistAdd";
-import TextField from '@material-ui/core/TextField';
-import List from '@material-ui/core/List';
-import Typography from "@material-ui/core/Typography";
+import TextField from '@material-ui/core/TextField/index';
+import List from '@material-ui/core/List/index';
+import Typography from "@material-ui/core/Typography/index";
 
 export class ExtendableList extends React.Component {
 

@@ -7,7 +7,6 @@ import AddIcon from '@material-ui/icons/Add';
 import ExcursionListItem from '../../components/ExcursionListItem/excursionListItem'
 import {getExcursionsMap, getExcursionLoadError} from "../../store/excursions/reducer";
 import {fetchExcursion} from "../../store/excursions/actions";
-import {getUserToken} from "../../store/user/reducer";
 
 import styles from './excursionsList.css';
 
@@ -16,7 +15,7 @@ class ExcursionsList extends React.Component {
 
     constructor(props) {
         super(props);
-        props.dispatch(fetchExcursion(props.token));
+        props.fetchExcursion();
     }
 
     onAddClick = () => {
@@ -55,10 +54,12 @@ class ExcursionsList extends React.Component {
 const mapStateToProps = (state) => {
     return {
         excursionsMap: getExcursionsMap(state),
-        token: getUserToken(state),
         error: getExcursionLoadError(state),
     }
 };
 
+const mapDispatchToProps = (dispatch) => ({
+    fetchExcursion: (token) => dispatch(fetchExcursion(token))
+});
 
-export default connect(mapStateToProps)(ExcursionsList);
+export default connect(mapStateToProps, mapDispatchToProps)(ExcursionsList);

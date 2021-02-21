@@ -24,6 +24,11 @@ export default function reduce(state = initialState, action) {
         errorMessage: action.errorMessage,
         excursionsMap: action.excursionsMap,
       };
+    case types.EXCURSION_CREATED:
+      return {
+        ...state,
+        newExcursion: action.id
+      };
     default:
       return state;
   }
@@ -41,4 +46,8 @@ export function getExcursionsMap(state) {
 
 export function getExcursionLoadError(state) {
   return state.excursions.errorMessage;
+}
+
+export function getNewExcursionID(state) {
+  return state.excursions.newExcursion;
 }

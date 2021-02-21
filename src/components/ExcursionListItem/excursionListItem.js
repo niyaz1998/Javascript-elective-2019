@@ -27,7 +27,9 @@ class ExcursionListItem extends React.Component {
         return (
             <ListItem className={styles.item}>
                 <Card className={styles.card}>
-                    <img src={excursion['images'][0]} className={styles.image} alt={"Loading..."}/>
+                    <div className={styles.imageContainer}>
+                    <img src={excursion['images'][0]} alt={"Loading..."} className={styles.image}/>
+                    </div>
                     <div className={styles.details}>
                         <CardContent>
                             <Typography component="h5" variant="h5">
